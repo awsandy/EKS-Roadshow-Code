@@ -1,6 +1,6 @@
 kubectl create namespace low-usage
 kubectl create namespace high-usage
-
+kubectl create namespace unrestricted-usage
 cat <<EoF > low-usage-limit-range.yml
 apiVersion: v1
 kind: LimitRange
