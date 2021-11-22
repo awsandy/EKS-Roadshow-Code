@@ -21,7 +21,7 @@ globalDefault: false
 description: "Low-priority Pods"
 EoF
 
-kubectl apply low-priority-class.yml
+kubectl apply -f low-priority-class.yml
 sleep 5
 echo "deploy low pri pods"
 
