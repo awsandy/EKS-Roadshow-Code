@@ -15,5 +15,5 @@ kubectl get pods -l app.kubernetes.io/name=nginx
 kubectl get service mywebserver-nginx -o wide
 #sleep 60
 #curl
-echo "curl the URL" 
+echo "wait 2 minutes then curl the ELB URL" 
 

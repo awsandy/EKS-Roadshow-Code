@@ -1,3 +1,4 @@
+echo "deploy fargate profile - this will take a few minutes ...."
 eksctl create fargateprofile \
   --cluster eksworkshop-eksctl \
   --name game-2048 \
@@ -39,11 +40,14 @@ spec:
         - containerPort: 80
 EOF
 
-
+echo "deploy app to fargate"
 kubectl apply -f f-app-deployment.yaml
-sleep 2
+sleep 5
 kubectl get deployment -n game-2048
-sleep 2
+echo "wait for fargate to schedule pod"
+sleep 30
+echo "wait for fargate to schedule pod"
+sleep 30
 kubectl get pods -n game-2048
 echo "pod name for forwarding"
 kubectl get pods -n game-2048 | grep fargate-deployment-2048 | cut -f1 -d' '
