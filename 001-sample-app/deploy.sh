@@ -22,3 +22,5 @@ spec:
         - containerPort: 80
 EOF
 kubectl apply -f app-deployment.yaml
+sleep 5
+kubectl get deployment
