@@ -20,7 +20,7 @@ kubectl run --namespace blue --limits=cpu=0.25,memory=250M --image nginx blue-ng
 kubectl run --namespace blue --limits=cpu=0.25,memory=250M --image nginx blue-nginx-pod-2 --restart=Never --restart=Never
 kubectl run --namespace blue --limits=cpu=0.25,memory=250M --image nginx blue-nginx-pod-3 --restart=Never --restart=Never
 sleep 5
-echo"check quotas/utilization"
+echo "check quotas/utilization"
 kubectl describe quota blue-team --namespace blue
 kubectl describe quota red-team --namespace red
 sleep 5
