@@ -48,6 +48,7 @@ sudo chmod +x /usr/local/bin/kubectl
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
 sudo ./aws/install
+rm -rf aws awscliv2.zip
 sudo yum -y install jq gettext bash-completion moreutils
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
