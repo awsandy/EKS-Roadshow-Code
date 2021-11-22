@@ -49,6 +49,13 @@ sleep 30
 echo "wait for fargate to schedule pod"
 sleep 30
 kubectl get pods -n game-2048
+echo "wait for fargate to schedule pod"
+sleep 15
+kubectl get pods -n game-2048
+echo "wait for fargate to schedule pod"
+sleep 15
+kubectl get pods -n game-2048
+
 echo "pod name for forwarding"
 kubectl get pods -n game-2048 | grep fargate-deployment-2048 | cut -f1 -d' '
 
