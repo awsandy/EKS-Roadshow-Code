@@ -20,6 +20,5 @@ kubectl delete priorityclass high-priority
 kubectl delete priorityclass low-priority
 
 # Prerequisites 
-rm  -r ~/environment/resource-management/
-helm uninstall metrics-server --namespace metrics
+#helm uninstall metrics-server --namespace metrics
 kubectl delete namespace metrics-server
