@@ -14,4 +14,6 @@ kubectl get svc,po,deploy
 kubectl describe deployment mywebserver
 kubectl get pods -l app.kubernetes.io/name=nginx
 kubectl get service mywebserver-nginx -o wide
+sleep 60
+curl 
 
