@@ -33,7 +33,7 @@ metadata:
     app: nginx-deployment
   name: nginx-deployment
 spec:
-  replicas: 50
+  replicas: 5
   selector:
     matchLabels:
       app: nginx-deployment
