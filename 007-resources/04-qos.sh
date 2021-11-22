@@ -48,7 +48,7 @@ spec:
          name: nginx-deployment
          resources:
            limits:
-              memory: 200m  
+              memory: 1G 
 EoF
 kubectl apply -f low-priority-deployment.yml
 sleep 5
@@ -88,7 +88,7 @@ spec:
          name: high-nginx-deployment
          resources:
            limits:
-              memory: 200m
+              memory: 1G
 EoF
 kubectl apply -f high-priority-deployment.yml
 
