@@ -1,4 +1,4 @@
-cat <<EoF > ~/environment/resource-management/low-usage-limit-range.yml
+cat <<EoF > low-usage-limit-range.yml
 apiVersion: v1
 kind: LimitRange
 metadata:
@@ -14,9 +14,9 @@ spec:
     type: Container
 EoF
 
-kubectl apply -f ~/environment/resource-management/low-usage-limit-range.yml --namespace low-usage
+kubectl apply -f low-usage-limit-range.yml --namespace low-usage
 
-cat <<EoF > ~/environment/resource-management/high-usage-limit-range.yml
+cat <<EoF > high-usage-limit-range.yml
 apiVersion: v1
 kind: LimitRange
 metadata:
@@ -32,7 +32,7 @@ spec:
     type: Container
 EoF
 
-kubectl apply -f ~/environment/resource-management/high-usage-limit-range.yml --namespace high-usage
+kubectl apply -f high-usage-limit-range.yml --namespace high-usage
 
 echo "Error due to higher memory request than defined in low-usage namespace: wanted 1g memory above max of 300m"
 kubectl run --namespace low-usage --requests=memory=1G,cpu=0.5 --image  hande007/stress-ng basic-request-pod --restart=Never --  --vm-keep   --vm-bytes 2g --timeout 600s --vm 1 --oomable --verbose 

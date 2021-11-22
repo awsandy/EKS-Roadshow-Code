@@ -1,6 +1,7 @@
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
 kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
-sleep 5
+echo "sleep 1m"
+sleep 60
 kubectl get deployment metrics-server -n kube-system
 
 # Deploy Limits pod with hard limit on cpu at 500m but wants 1000m
