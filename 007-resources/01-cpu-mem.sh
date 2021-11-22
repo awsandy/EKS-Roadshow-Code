@@ -1,6 +1,6 @@
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
 kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
-echo "sleep 2m"
+echo "sleep 2 minutes for metrics sevrer to fire up .."
 sleep 120
 kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
 kubectl get deployment metrics-server -n kube-system
