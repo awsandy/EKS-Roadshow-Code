@@ -1,3 +1,5 @@
+source ~/.bash_profile
+echo ${AZS[0]}
 cat << EOF > eksworkshop.yaml
 ---
 apiVersion: eksctl.io/v1alpha5
