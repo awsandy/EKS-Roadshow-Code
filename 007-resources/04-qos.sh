@@ -48,19 +48,19 @@ spec:
          name: nginx-deployment
          resources:
            limits:
-              memory: 1G  
+              memory: 200m  
 EoF
 kubectl apply -f low-priority-deployment.yml
 sleep 5
 kubectl get deployment nginx-deployment
 echo "sleep 1m 1 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
 echo "sleep 1m 2 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
 echo "sleep 1m 3 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
 
 echo "high pri pod deployment"
@@ -88,18 +88,22 @@ spec:
          name: high-nginx-deployment
          resources:
            limits:
-              memory: 1G
+              memory: 200m
 EoF
 kubectl apply -f high-priority-deployment.yml
 
 sleep 5
 kubectl get deployment nginx-deployment
+kubectl get deployment high-nginx-deployment
 echo "sleep 1m 1 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
+kubectl get deployment high-nginx-deployment
 echo "sleep 1m 2 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
+kubectl get deployment high-nginx-deployment
 echo "sleep 1m 3 of 3"
-sleep 60
+sleep 30
 kubectl get deployment nginx-deployment
+kubectl get deployment high-nginx-deployment
