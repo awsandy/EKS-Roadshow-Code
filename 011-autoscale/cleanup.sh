@@ -2,8 +2,7 @@
 kubectl delete hpa,svc php-apache
 kubectl delete deployment php-apache
 kubectl delete pod load-generator
-cd ~/environment
-rm -rf ~/environment/cluster-autoscaler
+
 kubectl delete -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.4.1/components.yaml
 kubectl delete ns metrics
 helm uninstall kube-ops-view
