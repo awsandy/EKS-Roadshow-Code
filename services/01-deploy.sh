@@ -35,6 +35,8 @@ kubectl -n my-nginx get svc my-nginx
 export MyClusterIP=$(kubectl -n my-nginx get svc my-nginx -ojsonpath='{.spec.clusterIP}')
 
 # Create a new deployment and allocate a TTY for the container in the pod
-kubectl -n my-nginx run -i --tty load-generator --env="MyClusterIP=${MyClusterIP}" --image=busybox /bin/sh
 echo "wget -q -O - ${MyClusterIP} | grep '<title>'"
 echo "exit"
+kubectl -n my-nginx run -i --tty load-generator --env="MyClusterIP=${MyClusterIP}" --image=busybox /bin/sh
+
+
