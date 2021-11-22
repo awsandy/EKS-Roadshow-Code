@@ -1,7 +1,8 @@
 kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/download/v0.5.0/components.yaml
 kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
-echo "sleep 1m"
-sleep 60
+echo "sleep 2m"
+sleep 120
+kubectl get apiservice v1beta1.metrics.k8s.io -o json | jq '.status'
 kubectl get deployment metrics-server -n kube-system
 
 # Deploy Limits pod with hard limit on cpu at 500m but wants 1000m
@@ -15,10 +16,10 @@ kubectl run --requests=cpu=1,memory=1G --limits=cpu=1.8,memory=2G --image  hande
 
 # Deploy Limits pod with hard limit on memory at 1G but wants 2G
 kubectl run --limits=memory=1G,cpu=1 --image  hande007/stress-ng basic-limit-memory-pod --restart=Never --  --vm-keep  --vm-bytes 2g --timeout 600s --vm 1 --oomable --verbose 
-sleep 5
+sleep 10
 kubectl get pod
 kubectl top pod
-sleep 5
+sleep 10
 kubectl delete pod basic-request-pod
 kubectl delete pod basic-limit-memory-pod
 kubectl delete pod basic-limit-cpu-pod
