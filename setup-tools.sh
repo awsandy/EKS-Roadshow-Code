@@ -3,8 +3,8 @@ sudo yum -y -q -e 0 install jq gettext bash-completion moreutils  > /dev/null
 echo "Install AWS CLI v2"
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip -qq awscliv2.zip
-sudo ./aws/install --upgrade > /dev/null
-rm -rf awscliv2.zip
+sudo ./aws/install --update > /dev/null
+rm -rf aws awscliv2.zip
 
 echo "resize OS disk"
 # ------  resize OS disk -----------
