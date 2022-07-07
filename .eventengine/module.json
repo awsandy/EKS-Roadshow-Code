@@ -1,0 +1,72 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "EKS Roadshow stack",
+    "Resources": {
+        "C9Environment": {
+            "Type": "AWS::Cloud9::EnvironmentEC2",
+            "DependsOn": "AWSCloud9SSMInstanceProfile",
+            "Properties": {
+                "AutomaticStopTimeMinutes": 120,
+                "ConnectionType": "CONNECT_SSM",
+                "Description": "EKS Roadshow",
+                "InstanceType": "t3.small",
+                "Name": "eks-roadshow",
+                "OwnerArn": {
+                    "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:assumed-role/TeamRole/MasterKey"
+                },
+                "Repositories": [
+                    {
+                        "PathComponent": "eksroadshow",
+                        "RepositoryUrl": "https://github.com/awsandy/EKS-Roadshow-Code.git"
+                    }
+                ],
+                "Tags": [
+                    {
+                        "Key": "workshop",
+                        "Value": "eks-roadshow"
+                    }
+                ]
+            }
+        },
+        "EKSRoadshowAccessRole": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+                "AssumeRolePolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                        {
+                            "Effect": "Allow",
+                            "Principal": {
+                                "Service": [
+                                    "cloud9.amazonaws.com",
+                                    "ec2.amazonaws.com"
+                                ]
+                            },
+                            "Action": [
+                                "sts:AssumeRole"
+                            ]
+                        }
+                    ]
+                },
+                "Description": "Service linked role for AWS Cloud9",
+                "Path": "/service-role/",
+                "ManagedPolicyArns": [
+                    "arn:aws:iam::aws:policy/AdministratorAccess"
+                ],
+                "RoleName": "EKSRoadshowAccessRole"
+            }
+        },
+        "AWSCloud9SSMInstanceProfile": {
+            "Type": "AWS::IAM::InstanceProfile",
+            "Properties": {
+                "InstanceProfileName": "AWSCloud9SSMInstanceProfile",
+                "Path": "/cloud9/",
+                "Roles": [
+                    {
+                        "Ref": "EKSRoadshowAccessRole"
+                    }
+                ]
+            }
+        }
+    }
+}

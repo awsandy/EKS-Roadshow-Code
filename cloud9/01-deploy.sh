@@ -47,7 +47,7 @@ sudo curl --silent --location -o /usr/local/bin/kubectl \
 sudo chmod +x /usr/local/bin/kubectl
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 unzip awscliv2.zip
-sudo ./aws/install
+sudo ./aws/install --upgrade
 rm -rf aws awscliv2.zip
 sudo yum -y install jq gettext bash-completion moreutils
 echo 'yq() {
@@ -60,7 +60,7 @@ for command in kubectl jq envsubst aws
 kubectl completion bash >>  ~/.bash_completion
 . /etc/profile.d/bash_completion.sh
 . ~/.bash_completion
-echo 'export LBC_VERSION="v2.3.0"' >>  ~/.bash_profile
+echo 'export LBC_VERSION="v2.4.2"' >>  ~/.bash_profile
 . ~/.bash_profile
 
 

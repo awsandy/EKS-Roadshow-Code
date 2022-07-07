@@ -1,3 +1,10 @@
+aws sts get-caller-identity --query Arn | grep eksworkshop-admin -q
+if [[ $? -ne 0 ]];then
+    aws sts get-caller-identity --query Arn
+    echo "Invalid Instance Identity does not contain eksworkshop-admin"
+    echo "exiting ...."
+    exit
+fi
 rm -vf ${HOME}/.aws/credentials
 export ACCOUNT_ID=$(aws sts get-caller-identity --output text --query Account)
 export AWS_REGION=$(curl -s 169.254.169.254/latest/dynamic/instance-identity/document | jq -r '.region')
