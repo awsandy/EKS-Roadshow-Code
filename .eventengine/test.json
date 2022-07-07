@@ -1,16 +1,16 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "EKS Roadshow stack",
+    "Description": "Cloud9 Terrform EKS stack",
     "Resources": {
         "C9Environment": {
             "Type": "AWS::Cloud9::EnvironmentEC2",
-            "DependsOn": "EKSRoadshowInstanceProfile",
+            "DependsOn": "ERInstanceProfile",
             "Properties": {
                 "AutomaticStopTimeMinutes": 120,
                 "ConnectionType": "CONNECT_SSM",
-                "Description": "EKS Roadshow",
-                "InstanceType": "t3.small",
-                "Name": "eks-roadshow",
+                "Description": "Terraform EKS Workshop",
+                "InstanceType": "t2.small",
+                "Name": "eks-terraform",
                 "OwnerArn": {
                     "Fn::Sub": "arn:aws:iam::${AWS::AccountId}:user/andyt530"
                 },
@@ -28,7 +28,7 @@
                 ]
             }
         },
-        "EKSRoadshowAccessRole": {
+        "AWSCloud9SSMAccessRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "AssumeRolePolicyDocument": {
@@ -53,17 +53,17 @@
                 "ManagedPolicyArns": [
                     "arn:aws:iam::aws:policy/AdministratorAccess"
                 ],
-                "RoleName": "EKSRoadshowAccessRole"
+                "RoleName": "AWSCloud9SSMAccessRole"
             }
         },
-        "EKSRoadshowInstanceProfile": {
+        "AWSCloud9SSMInstanceProfile": {
             "Type": "AWS::IAM::InstanceProfile",
             "Properties": {
-                "InstanceProfileName": "EKSRoadshowInstanceProfile",
+                "InstanceProfileName": "AWSCloud9SSMInstanceProfile",
                 "Path": "/cloud9/",
                 "Roles": [
                     {
-                        "Ref": "EKSRoadshowAccessRole"
+                        "Ref": "AWSCloud9SSMAccessRole"
                     }
                 ]
             }
