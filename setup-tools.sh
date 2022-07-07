@@ -48,6 +48,7 @@ else
   # Expand the size of the file system.
   # sudo resize2fs /dev/nvme0n1p1 #(Amazon Linux 1)
   sudo xfs_growfs /dev/nvme0n1p1 > /dev/null #(Amazon Linux 2)
+  
 fi
 df -m /
 
