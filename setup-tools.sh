@@ -60,26 +60,31 @@ if [ ! `which kubectl 2> /dev/null` ]; then
   sudo mv ./kubectl  /usr/local/bin/kubectl > /dev/null
   kubectl completion bash >>  ~/.bash_completion
 fi
-
- 
+echo "Setup kubectl"
+if [ ! `which eksctl 2> /dev/null` ]; then
+  echo "Install eksctl"
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+sudo mv -v /tmp/eksctl /usr/local/bin
+fi
 
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
 }' | tee -a ~/.bashrc && source ~/.bashrc
 
-for command in kubectl jq envsubst aws
+for command in kubectl jq envsubst aws eksctl
   do
     which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
   done
+
 kubectl completion bash >>  ~/.bash_completion
 . /etc/profile.d/bash_completion.sh
 . ~/.bash_completion
 echo 'export LBC_VERSION="v2.4.2"' >>  ~/.bash_profile
 
 cd ~/environment
-git clone https://github.com/aws-containers/ecsdemo-frontend.git
-git clone https://github.com/brentley/ecsdemo-nodejs.git
-git clone https://github.com/brentley/ecsdemo-crystal.git
+git clone https://github.com/aws-containers/ecsdemo-frontend.git &> /dev/null
+git clone https://github.com/brentley/ecsdemo-nodejs.git &> /dev/null
+git clone https://github.com/brentley/ecsdemo-crystal.git &> /dev/null
 
 
 aws kms create-alias --alias-name alias/eksworkshop --target-key-id $(aws kms create-key --query KeyMetadata.Arn --output text)
