@@ -63,8 +63,8 @@ fi
 echo "Setup kubectl"
 if [ ! `which eksctl 2> /dev/null` ]; then
   echo "Install eksctl"
-curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
-sudo mv -v /tmp/eksctl /usr/local/bin
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  sudo mv -v /tmp/eksctl /usr/local/bin
 fi
 
 echo 'yq() {
