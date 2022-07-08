@@ -1,8 +1,10 @@
 echo "Install OS tools"
 sudo yum -y -q -e 0 install jq gettext bash-completion moreutils  > /dev/null
-echo "Install AWS CLI v2"
-curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+echo "Fetch AWS CLI v2"
+curl --silent "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+echo "Unzip AWS CLI v2"
 unzip -qq awscliv2.zip
+echo "Install AWS CLI v2"
 sudo ./aws/install --update > /dev/null
 rm -rf aws awscliv2.zip
 
@@ -52,7 +54,6 @@ else
 fi
 df -m /
 
-echo "Setup kubectl"
 if [ ! `which kubectl 2> /dev/null` ]; then
   echo "Install kubectl"
   curl --silent -LO https://storage.googleapis.com/kubernetes-release/release/`curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt`/bin/linux/amd64/kubectl  > /dev/null
@@ -60,14 +61,13 @@ if [ ! `which kubectl 2> /dev/null` ]; then
   sudo mv ./kubectl  /usr/local/bin/kubectl > /dev/null
   kubectl completion bash >>  ~/.bash_completion
 fi
-echo "Setup eksctl"
+
 if [ ! `which eksctl 2> /dev/null` ]; then
   echo "Install eksctl"
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
   sudo mv -v /tmp/eksctl /usr/local/bin
 fi
 
-echo "Setup helm"
 if [ ! `which helm 2> /dev/null` ]; then
   echo "Install helm"
   curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
