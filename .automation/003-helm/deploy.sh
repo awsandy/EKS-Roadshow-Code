@@ -1,5 +1,3 @@
-curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
-helm version --short
 helm search repo nginx
 echo "add bitnami repo"
 helm repo add bitnami https://charts.bitnami.com/bitnami

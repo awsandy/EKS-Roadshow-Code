@@ -67,11 +67,19 @@ if [ ! `which eksctl 2> /dev/null` ]; then
   sudo mv -v /tmp/eksctl /usr/local/bin
 fi
 
+echo "Setup helm"
+if [ ! `which helm 2> /dev/null` ]; then
+  echo "Install helm"
+  curl -sSL https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+  helm version --short
+fi
+
+
 echo 'yq() {
   docker run --rm -i -v "${PWD}":/workdir mikefarah/yq "$@"
 }' | tee -a ~/.bashrc && source ~/.bashrc
 
-for command in kubectl jq envsubst aws eksctl
+for command in kubectl jq envsubst aws eksctl helm
   do
     which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
   done
