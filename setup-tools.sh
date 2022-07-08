@@ -60,7 +60,7 @@ if [ ! `which kubectl 2> /dev/null` ]; then
   sudo mv ./kubectl  /usr/local/bin/kubectl > /dev/null
   kubectl completion bash >>  ~/.bash_completion
 fi
-echo "Setup kubectl"
+echo "Setup eksctl"
 if [ ! `which eksctl 2> /dev/null` ]; then
   echo "Install eksctl"
   curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
