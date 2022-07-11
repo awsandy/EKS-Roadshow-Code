@@ -17,8 +17,6 @@ echo "export ACCOUNT_ID=${ACCOUNT_ID}" | tee -a ~/.bash_profile
 echo "export AWS_REGION=${AWS_REGION}" | tee -a ~/.bash_profile
 echo "export AZS=(${AZS[@]})" | tee -a ~/.bash_profile
 aws configure set default.region ${AWS_REGION}
-echo "AWS Region:"
-aws configure get default.region
 
 echo "resize OS disk"
 # ------  resize OS disk -----------
